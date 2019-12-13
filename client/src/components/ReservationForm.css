@@ -1,0 +1,74 @@
+.inp {
+  position: relative;
+  margin: auto;
+  max-width: 280px;
+  margin-left: 2%;
+  margin-right: 3%;
+}
+.inp .label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 16px;
+  color: #F0F0F0;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+.inp .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 80%;
+  background: #07f;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+.inp input {
+  width: 15%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border-radius: 0;
+  color: #223254;
+  transition: all 0.15s ease;
+  margin-right: 10px;
+}
+.inp input:hover {
+  background: #F0F0F0;
+}
+.inp input:not(:placeholder-shown) + span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus {
+  background: none;
+  outline: none;
+}
+.inp input:focus + span {
+  color: #07f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus + span + .border {
+  transform: scaleX(1);
+}
+
+.writeBtn {
+  background-color: #2B7DE9;
+}
+.writeBtn:hover {
+  background:whitesmoke;
+  color:#2B7DE9;
+}
+
+.datePicker {
+  width: 80%;
+  margin-left: 10%;
+  outline: none;
+}

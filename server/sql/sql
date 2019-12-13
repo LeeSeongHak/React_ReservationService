@@ -1,0 +1,90 @@
+--PLACE TABLE
+--CREATE
+CREATE TABLE reservation_place(
+	brdno SERIAL PRIMARY KEY
+	, placename VARCHAR(30) UNIQUE
+	, placecode VARCHAR(20) UNIQUE
+);
+
+--INSERT
+INSERT INTO reservation_place(placename, placecode) VALUES('会議室3', '0000003');
+
+--SELECT
+SELECT placename FROM reservation_place ORDER BY brdno;
+
+
+--RESERVATION TABLE
+--CREATE
+CREATE TABLE reservation_table(
+   brdno SERIAL PRIMARY KEY,
+   place VARCHAR(30),
+   starttime TIMESTAMP,
+   endtime TIMESTAMP,
+   username VARCHAR(50)
+);
+
+--SELECT
+SELECT brdno
+	, place
+	, to_char(starttime, 'YYYY/MM/DD HH24:MI') AS starttime
+	, to_char(endtime, 'YYYY/MM/DD HH24:MI') AS endtime
+	, username 
+	FROM reservation_table
+	WHERE starttime > CURRENT_TIMESTAMP
+	ORDER BY place;
+
+--INSERT
+INSERT INTO reservation_table(
+	place,
+	starttime,
+	endtime,
+	username
+	) VALUES(
+	'会議室3',
+	'2018/11/24 12:00',
+	'2018/11/24 13:30',
+	'test3'
+);
+
+--UPDATE
+UPDATE reservation_table SET
+	place = '会議室２',
+	starttime = '2019/12/20 10:00',
+	endtime = '2019/12/20 12:00',
+	username = 'lee'
+	WHERE brdno = '3';
+
+--DELETE
+DELETE FROM reservation_table WHERE brdno = '';
+
+
+
+--VIEW1
+CREATE VIEW VIEW_RESERVATION(brdno, place, starttime, endtime, username) AS 
+SELECT
+  brdno
+ 	, place
+	, to_char(starttime, 'YYYY/MM/DD HH24:MI') AS starttime
+	, to_char(endtime, 'YYYY/MM/DD HH24:MI') AS endtime
+	, username
+FROM
+  reservation_table
+  WHERE starttime > current_timestamp
+  ORDER BY starttime, place;
+
+--VIEW2
+CREATE VIEW VIEW_ENTIRE_RESERVATION(brdno, place, starttime, endtime, username) AS 
+SELECT
+  brdno
+ 	, place
+	, to_char(starttime, 'YYYY/MM/DD HH24:MI') AS starttime
+	, to_char(endtime, 'YYYY/MM/DD HH24:MI') AS endtime
+	, username
+FROM
+  reservation_table
+  ORDER BY starttime, place;
+
+--VIEW SELECT
+SELECT * FROM VIEW_RESERVATION
+SELECT COUNT(*) FROM VIEW_RESERVATION WHERE place LIKE '会議室１' AND endtime >= '2019/12/21 13:00' AND starttime <= '2019/12/21 16:00' AND brdno != 30
+SELECT * FROM VIEW_ENTIRE_RESERVATION

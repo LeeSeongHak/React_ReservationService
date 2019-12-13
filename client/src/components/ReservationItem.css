@@ -1,0 +1,26 @@
+input {
+    width: 50%;
+    border: 0;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    background: none;
+    border-radius: 0;
+    color: #2B7DE9;
+    outline: none;
+}
+
+.editBtn, .completeBtn {
+    background-color: cadetblue;
+}
+
+.editBtn:hover, .completeBtn:hover {
+    background:whitesmoke;
+    color:cadetblue;
+}
+
+.datePicker {
+    width: 80%;
+    margin-left: 10%;
+    outline: none;
+}
